@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #212121; color: #fff;">
+    <script>
+        let divBox = document.createElement('div');
+        divBox.classList.add('parent')
+        divBox.id = 'header'
+        divBox.style.border = '2px solid aliceblue'
+        divBox.style.padding = '10px'
+
+        let h1 = document.createElement('h1')
+        h1.id = 'header-title'
+        h1.classList.add('child')
+        h1.style.textAlign = 'center'
+        let textNode = document.createTextNode(`How to gain 50k follower in 5 month?`)
+        h1.append(textNode)
+        divBox.append(h1)
+
+        let hr = document.createElement('hr')
+        console.log(hr)
+        divBox.append(hr)
+
+        let p = document.createElement('p')
+        p.id = 'header-content'
+        p.classList.add('child')
+        p.style.textAlign = 'center'
+        let textNode2 = document.createTextNode('Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse sapiente impedit quibusdam aperiam. Doloribus in consectetur sit nemo deserunt dolores accusantium suscipit non et quaerat! Labore suscipit quam eius aspernatur. Omnis beatae reiciendis rem illo numquam blanditiis, laborum asperiores saepe est perspiciatis autem. Tenetur quasi, vero blanditiis soluta eos quidem ea, provident nihil, amet alias quaerat enim? Minima sequi qui eveniet, saepe temporibus aspernatur perferendis quaerat ea mollitia cum possimus, facilis fugit quas in labore est animi aperiam numquam facere rerum ad magni! Fugiat minus repudiandae, et cupiditate, laborum at nihil, nostrum perferendis amet assumenda ab qui aut dignissimos unde!')
+        p.append(textNode2)
+        divBox.append(p)
+
+        document.body.append(divBox)
+
+        // Just like append there is prepend, before, after and replacewith method.
+        // document.querySelector('.parent').prepend(divBox);
+        // document.querySelector('.parent').before(divBox);
+        // document.querySelector('.parent').after(divBox);
+        // document.querySelector('.container').replaceWith(divBox);
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!-- DOM => Document Object Model -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title id="page-title">Document</title>
+  <style>
+    .bg-black {
+        background-color: #212121;
+        color: #fff;
+    }
+  </style>
+</head>
+<body class="bg-black">
+    <div class="title">
+      <h1 id="title-heading" class="heading">Hello from Browser</h1>
+      <p id="title-content" class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic nostrum harum facilis obcaecati! Fugiat culpa consequuntur ab minus, ipsa possimus! Explicabo tempora repudiandae repellat esse ullam incidunt neque quaerat alias. <span style="display: none;">Lorem, ipsum dolor.</span></p>
+    </div>
+    <script>
+        let titleContent  = document.getElementById('title-content');
+        console.log(titleContent.innerHTML);
+        console.log(titleContent.textContent); // gives the entire text content, even the hidden one.
+        console.log(titleContent.innerText); // gives the visible text content only.
+        // titleContent.textContent = 'Bikram Saha';
+        // titleContent.innerText = 'Bikram Saha';
+    </script>
+</body>
+</html>

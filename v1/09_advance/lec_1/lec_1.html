@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container" id="profile-container">
+    </div>
+    <script>
+        const requestUrl = 'https://api.github.com/users/bikrampy'
+        const xhr = new XMLHttpRequest();
+        let data;
+        // console.log(xhr.readyState); // 0
+        xhr.open('GET', requestUrl)
+        // console.log(xhr.readyState); // 1
+        xhr.send();
+        xhr.onreadystatechange = function(){
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                data = JSON.parse(this.responseText);
+                // console.log(data);
+                const container = document.querySelector('.container');
+                container.innerHTML = `
+                    <div style="text-align:center; padding:20px; color:#333;">
+                        <img src="${data.avatar_url}" alt="Profile Picture" width="120" style="border-radius:50%;"><br>
+                        <h2>${data.name || data.login}</h2>
+                        <p><b>Followers:</b> ${data.followers}</p>
+                        <p><b>Following:</b> ${data.following}</p>
+                        <p><b>Public Repos:</b> ${data.public_repos}</p>
+                    </div>
+                `;
+            }
+        }
+        // Value
+        // 0 - UNSENT – created but not opened
+        // 1 - OPENED – .open() called
+        // 2 - HEADERS_RECEIVED – response headers ready
+        // 3 - LOADING – downloading (partial data available)
+        // 4 - DONE – request finished, response ready
+    </script>
+</body>
+</html>

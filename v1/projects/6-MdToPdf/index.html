@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <textarea id="markdown" rows="10" cols="50">Hello World, This is a Markdown to PDF converter.</textarea>
+    <button onclick="convert()">Convert to PDF</button>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <script>
+    function convert() {
+    const mdText = document.getElementById("markdown").value;
+    const htmlContent = marked.parse(mdText);
+    const element = document.createElement("div");
+    element.innerHTML = htmlContent;
+    html2pdf().from(element).save("output.pdf");
+    }
+</script>
+</body>
+</html>

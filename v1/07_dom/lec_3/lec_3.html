@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #212121; color: #fff;">
+    <div class="parent">
+        <div class="day">Sunday</div>
+        <div class="day">Monday</div>
+        <div class="day">Tuesday</div>
+        <div class="day">Wednesday</div>
+        <div class="day">Thursday</div>
+        <div class="day">Friday</div>
+        <div class="day">Saturday</div>
+    </div>
+</body>
+<script>
+    const parent = document.querySelector('.parent')
+    
+    // console.log(parent.childNodes); // Nodelist
+
+    // console.log(parent.children); // HTMLCollection, returns only the element nodes.
+
+    // for (let i = 0; i < parent.children.length; i++) {
+    //     console.log(parent.children[i].innerHTML);
+    // }
+
+    for (let index = 0; index < parent.children.length; index++) {
+        const element = parent.children[index];
+        element.style.color = "orange"
+    }
+    // console.log(parent.firstElementChild);
+    // console.log(parent.lastElementChild);
+
+    // let day = document.querySelector('.day')
+    // console.log(day); // Sunday
+    // console.log(day.nextElementSibling); // Monday
+
+    // let daylast = document.querySelector('.parent').lastElementChild
+    // console.log(daylast); // Saturday
+    // console.log(daylast.previousElementSibling); // Friday
+    
+    // console.log(day.parentElement); // div.parent
+</script>
+</html>

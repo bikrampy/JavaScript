@@ -1,0 +1,66 @@
+<!-- DOM => Document Object Model -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title id="page-title">Document</title>
+  <style>
+    .bg-black {
+        background-color: #212121;
+        color: #fff;
+    }
+  </style>
+</head>
+<body class="bg-black">
+    <div class="title">
+      <h1 id="title-heading" class="heading title">Hello from Browser 1</h1>
+      <h1 id="title-heading-2" class="heading">Hello from Browser 2</h1>
+      <h1 id="title-heading-3" class="heading">Hello from Browser 3</h1>
+      <p id="title-content" class="content">Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+      <p id="title-content-2" class="content">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto?</p>
+    </div>
+    <script>
+        // let element = document.getElementById('title-heading');
+        // console.log(element);
+        // console.log(element.id); // title-heading
+        // console.log(element.className); // heading title
+        // console.log(element.getAttribute('class')); // heading title
+        // document.getElementById('title-content').setAttribute('class', 'lorem'); // It overrides the existing class value with the new values
+
+        let headings = document.getElementsByClassName('heading') // HTMLCollection
+        let ArrayHeadings = Array.from(headings)
+        let userName = ['Bikram Saha', 'Shreyosi Halder', 'Sampad Kar']
+        let i = 0
+        ArrayHeadings.forEach( (items) => {
+            items.textContent = `Hello ${userName[i]}`;
+            items.style.width = '50%';
+            items.style.margin = 'auto'
+            i++;
+        } );
+
+        let titleContent = document.querySelector('#title-content');
+        // titleContent.style.backgroundColor = '#fff';
+        // titleContent.style.color = '#212121';
+        // titleContent.style.width = '50%';
+        // titleContent.style.padding = '15px';
+        // titleContent.style.margin = '15px auto';
+
+        let titleContentAll = document.querySelectorAll('.content') // NodeList
+        // titleContentAll[1].style.backgroundColor = '#fff';
+        // titleContentAll[1].style.color = '#212121';
+        // titleContentAll[1].style.width = '50%';
+        // titleContentAll[1].style.padding = '15px';
+        // titleContentAll[1].style.margin = '15px auto';
+
+        let mainBox = document.querySelector('.title')
+        let paragraphs = mainBox.querySelectorAll('.content') // It only selects the elements inside that mainBox.
+        paragraphs.forEach( (item) => {
+            item.style.border = '3px solid pink'
+            item.style.padding = '5px'
+            item.style.backgroundColor = '#fff'
+            item.style.color = '#212121'
+        } )
+        
+    </script>
+</body>
+</html>

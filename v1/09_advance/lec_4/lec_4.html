@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .child {
+        background-color: aliceblue;
+        border: 2px solid black;
+        padding: 15px;
+        margin: 15px;
+        cursor: pointer;
+      }
+      .container {
+        background-color: rgb(255, 255, 2);
+        border: 2px solid black;
+        padding: 15px;
+        margin: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="child">
+        I am a child
+      </div>
+    </div>
+    <button id="stopInterval">Stop</button>
+    <script>
+        let a = setInterval(() => {
+          document.querySelector(".child").textContent = `${Math.random()}`;
+        }, 2000);
+        document.getElementById('stopInterval').addEventListener(
+          'click', (e) => {
+            clearInterval(a);
+            document.querySelector(".child").textContent = "Stopped!";
+          }
+        )
+    </script>
+  </body>
+</html>
