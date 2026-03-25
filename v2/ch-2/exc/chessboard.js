@@ -20,4 +20,4 @@ for (let outer = 0; outer < size; outer++) {
         }
         console.log(result);
     }
-}
+};

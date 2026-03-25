@@ -7,4 +7,4 @@ function countChar(str, char) {
     };
     return result;
 }
-console.log(countChar('SHREYOSI', 'S'))
+console.log(countChar('SHREYOSI', 'S'));

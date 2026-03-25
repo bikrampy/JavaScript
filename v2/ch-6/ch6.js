@@ -92,13 +92,14 @@ let ages = Object.create(null);
 ages.Bikram = 24;
 ages.Shreyosi = 23;
 ages.Saswata = 21;
-console.log('toString' in ages);
+console.log(Object.hasOwn(ages, "Bikram")); // true
 
 let agesMap = new Map();
 agesMap.set('Bikram', 24);
 agesMap.set('Shreyosi', 23);
-agesMap.set('Saswata', 21);
-console.log(agesMap);
+console.log(agesMap.get('Shreyosi')); // 23
+console.log(agesMap.get('Saswata')); // undefined
+console.log(agesMap); // Map(2) { 'Bikram' => 24, 'Shreyosi' => 23 }
 for (let element of agesMap) {
     console.log(element);
 };
@@ -134,3 +135,79 @@ temp.fahrenheit = 71.6;
 console.log(temp.celsius); // 21
 let temp2 = Temperature.fromFahrenheit(212);
 console.log(temp2.celsius); // 100
+
+let sym = Symbol('name');
+console.log(sym == Symbol('name')); // false
+console.log(String(sym));
+console.log(sym);
+
+let length = Symbol('length');
+Array.prototype[length] = 0;
+console.log([1,2,3].length); // 3
+console.log([1,2,3][length]); // 0
+
+let myTrip = {
+    length: 2,
+    0: 'Kashmir',
+    1: 'Darjeeling',
+};
+myTrip[length] = 21500;
+console.log(myTrip.length); // 2
+console.log(myTrip[length]); // 21500
+
+class LinkedList {
+    constructor(value, rest) {
+        this.value = value;
+        this.rest = rest;
+    }
+    get length() {
+        return 1 + (this.rest ? this.rest.length : 0);
+    }
+    static fromArray(array) {
+        let result = null;
+        for (let i = array.length - 1; i >= 0; i--) {
+            result = new LinkedList(array[i], result);
+        };
+        return result;
+    }
+};
+
+class LinkedListIterator {
+    constructor(list) {
+        this.list = list;
+    }
+    next() {
+        if (this.list == null) {
+            return {done: true};
+        }
+        let value = this.list.value;
+        this.list = this.list.rest;
+        return {value, done: false};
+    }
+};
+LinkedList.prototype[Symbol.iterator] = function () {
+    return new LinkedListIterator(this);
+};
+
+let list = LinkedList.fromArray([1,2,3]);
+console.log(list);
+let listIterator = list[Symbol.iterator]();
+console.log(listIterator.next()); // { value: 1, done: false }
+console.log(listIterator.next()); // { value: 2, done: false }
+console.log(listIterator.next()); // { value: 3, done: false }
+console.log(listIterator.next()); // { done: true }
+for (const element of list) {
+    console.log(element);
+};
+
+class LengthLinkedList extends LinkedList {
+    #length;
+    constructor(value, rest) {
+        super(value, rest);
+        this.#length = super.length;
+    }
+    get length() {
+        return this.#length;
+    }
+};
+console.log(LengthLinkedList.fromArray([1,2,3,4]).length); // 4
