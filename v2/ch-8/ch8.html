@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function promptNumber(question) {
+            let result = Number(prompt(question));
+            return (Number.isNaN(result)) ? null : result;
+        };
+        let resultAge = promptNumber('How old are you?');
+        while (resultAge == null) {
+            alert('Enter a valid age.');
+            resultAge = promptNumber('How old are you?');
+        }
+        alert(`Your age is ${resultAge}`);
+
+        class DirectionInputError extends Error {};
+        function promptDirection() {
+            let result = prompt('Which way?');
+            if (result == 'left') {
+                return 'L';
+            } else if (result == 'right') {
+                return 'R';
+            } else {
+                throw new DirectionInputError(`Invalid direction: ${result}`);
+            };
+        };
+        function look() {
+            if (promptDirection() == "L") {
+                return 'house';
+            } else {
+                return '2 angry bears';
+            };
+        };
+        for (;;) {
+            try {
+                alert(look());
+                break;
+            } catch (e) {
+                if (e instanceof DirectionInputError) {
+                    console.log(`Invalid direction: ${e}`);
+                } else {
+                    throw e;
+                };
+            };
+        };
+        
+        let accounts = {
+            Bikram: 10000,
+            Shreyosi: 20,
+            Saswata: 100,
+        };
+        function getAccunt() {
+            let accountName = prompt("Enter an account name");
+            if (!Object.hasOwn(accounts, accountName)) {
+                throw new Error("No such account");
+            } else {
+                return accountName;
+            };
+        };
+        function transfer(from, amount) {
+            if (accounts[from] < amount) {
+                return
+            } else {
+                let progess = 0;
+                try {
+                    accounts[from] -= amount;
+                    progess = 1;
+                    accounts[getAccunt()] += amount;
+                    progess = 2;
+                } catch (error) {
+                    console.log(error);
+                } finally {
+                    if (progess == 1) {
+                        accounts[from] += amount;
+                    }
+                }
+            };
+        };
+        transfer('Bikram', 900);
+    </script>
+</body>
+</html>
