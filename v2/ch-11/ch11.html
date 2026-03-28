@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            // let promise1 = new Promise((resolve, reject) => {
+            //     resolve("Promise 1.");
+            // });
+            // console.log(promise1);
+            // let promise2 = new Promise((resolve, reject) => {
+            //     setTimeout(() => {
+            //         resolve('Promise 2');
+            //     }, 5000);
+            // });
+            // console.log(promise2);
+            // let promise3 = new Promise((res, rej) => {
+            //     setTimeout(() => {
+            //         res("Promise 3.");
+            //     }, 2000);
+            // });
+            // let promise4 = new Promise((res, rej) => {
+            //     res(promise3);
+            // });
+            // console.log(promise3, promise4);
+            let userName = prompt("Enter your github username");
+            let githubUserData = fetch(
+                `https://api.github.com/users/${userName}`,
+            );
+            // console.log(githubUserData);
+            githubUserData
+                .then((res) => {
+                    if (res.ok) {
+                        return res.json();
+                    }
+                    throw new Error("User Not Found");
+                })
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((err) => {
+                    console.log(err.message);
+                });
+        </script>
+    </body>
+</html>
