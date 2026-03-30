@@ -6,7 +6,7 @@
 // heavyTask();
 // console.log("End");
 
-// Async Program
+// Asynchronous Program
 // console.log('start');
 // setTimeout(() => {
 //     console.log('Hello from setTimeout.');
@@ -109,97 +109,97 @@
 // });
 // console.log('End');
 
-let users = [
-  {
-    userId: 1,
-    name: "Bikram",
-    email: "bikramsahanolimit@gmail.com",
-    address: "Kolkata"
-  },
-];
-let products = [
-  { productId: 101, name: "iPhone 16", price: 80000, stock: 5 },
-  { productId: 102, name: "MacBook Air M4", price: 120000, stock: 3 },
-  { productId: 103, name: "Bangles", price: 500, stock: 10 },
-];
-let carts = [
-  {
-    userId: 1,
-    items: [
-      { productId: 101, quantity: 1 },
-      { productId: 102, quantity: 1 },
-      { productId: 103, quantity: 2 },
-    ],
-  },
-];
-let orders = [];
-let payments = [];
-function validateCart(cart, products) {
-    return new Promise((resolve, reject) => {
-        if (!cart || !cart.items || cart.items.length === 0) {
-            return reject("Cart is empty");
-        }
-        for (let item of cart.items) {
-            let product = products.find(p => p.productId === item.productId);
-            if (!product) {
-                return reject(`Product not found: ${item.productId}`);
-            }
-            if (item.quantity <= 0) {
-                return reject(`Invalid quantity for productId ${item.productId}`);
-            }
-            if (item.quantity > product.stock) {
-                return reject(`Out of stock for productId ${item.productId}`);
-            }
-        }
-        resolve(cart);
-    });
-};
+// let users = [
+//   {
+//     userId: 1,
+//     name: "Bikram",
+//     email: "bikramsahanolimit@gmail.com",
+//     address: "Kolkata"
+//   },
+// ];
+// let products = [
+//   { productId: 101, name: "iPhone 16", price: 80000, stock: 5 },
+//   { productId: 102, name: "MacBook Air M4", price: 120000, stock: 3 },
+//   { productId: 103, name: "Bangles", price: 500, stock: 10 },
+// ];
+// let carts = [
+//   {
+//     userId: 1,
+//     items: [
+//       { productId: 101, quantity: 1 },
+//       { productId: 102, quantity: 1 },
+//       { productId: 103, quantity: 2 },
+//     ],
+//   },
+// ];
+// let orders = [];
+// let payments = [];
+// function validateCart(cart, products) {
+//     return new Promise((resolve, reject) => {
+//         if (!cart || !cart.items || cart.items.length === 0) {
+//             return reject("Cart is empty");
+//         }
+//         for (let item of cart.items) {
+//             let product = products.find(p => p.productId === item.productId);
+//             if (!product) {
+//                 return reject(`Product not found: ${item.productId}`);
+//             }
+//             if (item.quantity <= 0) {
+//                 return reject(`Invalid quantity for productId ${item.productId}`);
+//             }
+//             if (item.quantity > product.stock) {
+//                 return reject(`Out of stock for productId ${item.productId}`);
+//             }
+//         }
+//         resolve(cart);
+//     });
+// };
 
-function calculateTotal(cart, products) {
-    return new Promise((resolve, reject) => {
-        let total = 0;
-        for (let item of cart.items) {
-            let product = products.find(p => p.productId === item.productId);
-            if (!product) {
-                return reject(`Product not found: ${item.productId}`);
-            }
-            total += product.price * item.quantity;
-        }
-        resolve(total);
-    });
-};
+// function calculateTotal(cart, products) {
+//     return new Promise((resolve, reject) => {
+//         let total = 0;
+//         for (let item of cart.items) {
+//             let product = products.find(p => p.productId === item.productId);
+//             if (!product) {
+//                 return reject(`Product not found: ${item.productId}`);
+//             }
+//             total += product.price * item.quantity;
+//         }
+//         resolve(total);
+//     });
+// };
 
-function processPayment(total) {
-    return new Promise((resolve, reject) => {
-        console.log("Processing payment...");
-        setTimeout(() => {
-            let isSuccessful = Math.random() > 0.1;
-            if (isSuccessful) {
-                resolve(`Payment successful for ₹${total}`);
-            } else {
-                reject("Payment failed. Try again.");
-            }
-        }, 2000);
-    });
-};
+// function processPayment(total) {
+//     return new Promise((resolve, reject) => {
+//         console.log("Processing payment...");
+//         setTimeout(() => {
+//             let isSuccessful = Math.random() > 0.1;
+//             if (isSuccessful) {
+//                 resolve(`Payment successful for ₹${total}`);
+//             } else {
+//                 reject("Payment failed. Try again.");
+//             }
+//         }, 2000);
+//     });
+// };
 
-function createOrder(userId, cart, total) {
-    return new Promise((resolve, reject) => {
-        if (!userId || !cart || !total) {
-            return reject("Invalid order data");
-        };
-        let orderId = orders.length + 1;
-        let newOrder = {
-            orderId,
-            userId,
-            items: cart.items,
-            totalAmount: total,
-            status: "PLACED"
-        };
-        orders.push(newOrder);
-        resolve(newOrder);
-    });
-};
+// function createOrder(userId, cart, total) {
+//     return new Promise((resolve, reject) => {
+//         if (!userId || !cart || !total) {
+//             return reject("Invalid order data");
+//         };
+//         let orderId = orders.length + 1;
+//         let newOrder = {
+//             orderId,
+//             userId,
+//             items: cart.items,
+//             totalAmount: total,
+//             status: "PLACED"
+//         };
+//         orders.push(newOrder);
+//         resolve(newOrder);
+//     });
+// };
 
 // validateCart(carts[0], products)
 //     .then((res) => {
@@ -216,20 +216,97 @@ function createOrder(userId, cart, total) {
 //     });
 
 
-validateCart(carts[0], products)
-    .then((cart) => {
-        return calculateTotal(cart, products).then((total) => ({ cart, total }));
-    })
-    .then(({ cart, total }) => {
-        return processPayment(total).then(() => ({ cart, total }));
-    })
-    .then(({ cart, total }) => {
-        return createOrder(1, cart, total);
-    })
-    .then((order) => {
-        console.log("Order Created:", order);
-        console.log("All Orders:", orders);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+// validateCart(carts[0], products)
+//     .then((cart) => {
+//         return calculateTotal(cart, products).then((total) => ({ cart, total }));
+//     })
+//     .then(({ cart, total }) => {
+//         return processPayment(total).then(() => ({ cart, total }));
+//     })
+//     .then(({ cart, total }) => {
+//         return createOrder(1, cart, total);
+//     })
+//     .then((order) => {
+//         console.log("Order Created:", order);
+//         console.log("All Orders:", orders);
+//     })
+//     .catch((err) => {
+//         console.log(err);
+//     });
+
+// async function myFunction(name) {
+//     return `Hello ${name}`;
+// }
+// let res = myFunction('Bikram');
+// console.log(res);
+
+// async function myFunction2(name) {
+//     return new Promise((res) => {
+//         res(name);
+//     });
+// };
+// let res2 = myFunction2('Shreyosi');
+// console.log(res2);
+
+// async function myFunction3(name) {
+//     let res3 = await new Promise((res, rej) => {
+//         setTimeout(() => {
+//             res(name);
+//         }, 2000);
+//     })
+//     console.log(res3);
+// };
+// myFunction3('Shreyosi');
+
+// async function test() {
+//     console.log("A");
+//     let res = await new Promise((res) => {
+//         setTimeout(() => {
+//             res('B');
+//         }, 2000);
+//     });
+//     console.log(res);
+//     console.log("C");
+// };
+// console.log("Start");
+// test();
+// console.log("End");
+
+// async function getUserName(name) {
+//     let p = new Promise((res, rej) => {
+//         if (name !== 'Shreyosi') {
+//             setTimeout(() => {
+//                 rej('Invalid Username');
+//             }, 5000);
+//         } else {
+//             setTimeout(() => {
+//                 res(name);
+//             }, 5000);
+//         };
+//     });
+//     return p;
+// };
+// async function myFunction4(name) {
+//     try {
+//         let res4 = await getUserName(name);
+//         console.log(res4);
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };
+// myFunction4('Shrey');
+
+// async function fetchUserData(username) {
+//     try {
+//         let res = await fetch(`https://api.github.com/users/${username}`);
+//         if (res.ok) {
+//             let userData = await res.json();
+//             console.log(userData);
+//         } else {
+//             throw new Error("User Not Found");
+//         }
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+// }
+// fetchUserData('bikrampy');
